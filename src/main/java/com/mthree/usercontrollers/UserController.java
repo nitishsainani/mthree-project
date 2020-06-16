@@ -64,12 +64,12 @@ public class UserController {
 		
 	User u=userservice.Login(name,pass);
 	if(u!=null)
-	{   m.addAttribute("loginuser",u);
+	{   m.addAttribute("loginUser",u);
 		return m;
 	}
 	else
 	{
-		m.addAttribute("loginuser","user not found");
+		m.addAttribute("loginUser","user not found");
 		return m;
 	}
 	}
