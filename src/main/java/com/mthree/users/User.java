@@ -1,19 +1,27 @@
 package com.mthree.users;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)  
+@DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)  
+@DiscriminatorValue(value="user")  
 public class User {
 	@Id
 	@GeneratedValue
-	private int userId;
-	private String userName;
-	private String password;
-	private String fullName;
-	private String email;
-	private String dateOfBirth;
+	protected int userId;
+	protected String userName;
+	protected String password;
+	protected String fullName;
+	protected String email;
+	protected String dateOfBirth;
 	public User()
 	{
 		
@@ -69,6 +77,6 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-
+  
 
 }
