@@ -64,12 +64,12 @@ public class UserController {
 		
 	User u=userservice.Login(name,pass);
 	if(u!=null)
-	{   m.addAttribute("user",u);
+	{   m.addAttribute("loginuser",u);
 		return m;
 	}
 	else
 	{
-		m.addAttribute("user","user not found");
+		m.addAttribute("loginuser","user not found");
 		return m;
 	}
 	}
@@ -107,13 +107,13 @@ public class UserController {
 		Optional<User> u=userservice.getUserById(userId);
 		if(u.isPresent())
 		{
-			m.addAttribute("user",u);
+			m.addAttribute("displayuserbyId",u);
 			return m;
 		}
 		else
 
 		{
-			m.addAttribute("user","user is null");
+			m.addAttribute("displayuserbyId","user is null");
 			return m;
 		}
 	}
