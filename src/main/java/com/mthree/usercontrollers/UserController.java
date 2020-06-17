@@ -3,8 +3,8 @@ package com.mthree.usercontrollers;
 import java.util.List;
 import java.util.Optional;
 
+import com.mthree.responses.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.mthree.users.Dealer;
 import com.mthree.users.Trader;
@@ -25,63 +24,54 @@ public class UserController {
 	@Autowired
 	private UserService userservice;
     
-   
 	@PostMapping("/registerdealer")
-	public ModelAndView userRegister(@RequestBody Dealer dealer)
-	{   
-		//m=new  ModelAndView("success","registerdealerstatus","User added");
-		ModelAndView m=new  ModelAndView();
+	public String userRegister(@RequestBody Dealer dealer,Model m)
+	{
+
 
 		if(userservice.addUser(dealer))
 		{
-			m.addObject("registerdealerstatus", "User added");
-//			m=new  ModelAndView("success","registerdealerstatus","User added");
-		return m;
-			//return "User added";
+			m.addAttribute("registerdealerstatus", "User added");
+			return "user added";
 		}
 		else
-		{  
-			//m=new  ModelAndView("success","registerdealerstatus","User not added");
-			m.addObject("registerdealerstatus", "User not add there may be similarity in username or email added");
-			//return "User not add there may be similarity in username or email added";	
-			return m;
+		{
+			m.addAttribute("registerdealerstatus", "User not add there may be similarity in username or email added");
+			return "user not added";
 		}
 		
 	}
 	@PostMapping("/registertrader")
-	public String userRegister(@RequestBody Trader trader,Model m)
+	public Model userRegister(@RequestBody Trader trader,Model m)
 	{
 		
 
 		if(userservice.addUser(trader))
 		{
-//			m.addAttribute("registertraderstatus", "User added");
-//		return m;
-			return "User added";
+			m.addAttribute("registertraderstatus", "User added");
+		return m;
 		}
 		else
 		{
-//			m.addAttribute("registertraderstatus", "User not add there may be similarity in username or email added");
-//			return m;	
-			return "User not add there may be similarity in username or email added";
+			m.addAttribute("registertraderstatus", "User not add there may be similarity in username or email added");
+			return m;	
 		}
 		
 	}
 
 	@PostMapping("/login")
-	public User userLogin(@RequestParam("username") String name,@RequestParam("password") String pass)
+	public BaseResponse userLogin(@RequestParam("username") String name, @RequestParam("password") String pass, Model m)
 	{
 		
 	User u=userservice.Login(name,pass);
 	if(u!=null)
-	{   
-		return u;
+	{   m.addAttribute("loginuser",u);
+		return new BaseResponse(200, "yes", u);
 	}
 	else
-	{   u=null;
-//		m.addAttribute("loginuser","user not found");
-//		return m;
-		return u;
+	{
+		m.addAttribute("loginuser","user not found");
+		return new BaseResponse(200, "no");
 	}
 	}
 	@PutMapping("/userdealer")
@@ -113,48 +103,43 @@ public class UserController {
 		}
 	}
 	@GetMapping("/user")
-	public  Optional<User> userDisplayToEdit(@RequestParam("userId") int userId)
+	public  Model userDisplayToEdit(@RequestParam("userId") int userId,Model m)
 	{
 		Optional<User> u=userservice.getUserById(userId);
 		if(u.isPresent())
 		{
-//			m.addAttribute("displayuserbyId",u);
-//			return m;
-			return u;
+			m.addAttribute("displayuserbyId",u);
+			return m;
 		}
 		else
 
 		{
-//			m.addAttribute("displayuserbyId","user is null");
-//			return m;
-			return u;
+			m.addAttribute("displayuserbyId","user is null");
+			return m;
 		}
 	}
 	@DeleteMapping("/user")
-	public boolean deleteUser(@RequestParam("userId") int userId)
+	public Model deleteUser(@RequestParam("userId") int userId,Model m)
 	{
 		if(userservice.deleteUser(userId))
-		{  
-//			m.addAttribute("userDeleteStatus","User deleted");
-//			return m;
-			return true;
+		{   m.addAttribute("userDeleteStatus","User deleted");
+			return m;
 		}
 		else
 		{
-//			m.addAttribute("userDeleteStatus","User not deleted");
-//			return m;
-			return false;
+			m.addAttribute("userDeleteStatus","User not deleted");
+			return m;
 		}
 
 
 	}
 	@GetMapping("/getalluser")
-	public List<User> getUsers()
+	public Model getUsers(Model m)
 	
 	{   
 		List<User> u=userservice.getUsers();
-		//m.addAttribute("UserList", u);
-		return u;
+		m.addAttribute("UserList", u);
+		return m;
 		 
 	}
 
