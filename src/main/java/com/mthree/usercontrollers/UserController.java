@@ -3,6 +3,7 @@ package com.mthree.usercontrollers;
 import java.util.List;
 import java.util.Optional;
 
+import com.mthree.responses.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,19 +25,19 @@ public class UserController {
 	private UserService userservice;
     
 	@PostMapping("/registerdealer")
-	public Model userRegister(@RequestBody Dealer dealer,Model m)
+	public String userRegister(@RequestBody Dealer dealer,Model m)
 	{
 
 
 		if(userservice.addUser(dealer))
 		{
 			m.addAttribute("registerdealerstatus", "User added");
-		return m;
+			return "user added";
 		}
 		else
 		{
 			m.addAttribute("registerdealerstatus", "User not add there may be similarity in username or email added");
-			return m;	
+			return "user not added";
 		}
 		
 	}
@@ -59,18 +60,18 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public Model userLogin(@RequestParam("username") String name,@RequestParam("password") String pass,Model m)
+	public BaseResponse userLogin(@RequestParam("username") String name, @RequestParam("password") String pass, Model m)
 	{
 		
 	User u=userservice.Login(name,pass);
 	if(u!=null)
 	{   m.addAttribute("loginuser",u);
-		return m;
+		return new BaseResponse(200, "yes", u);
 	}
 	else
 	{
 		m.addAttribute("loginuser","user not found");
-		return m;
+		return new BaseResponse(200, "no");
 	}
 	}
 	@PutMapping("/userdealer")
