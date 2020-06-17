@@ -25,36 +25,42 @@ public class UserController {
 	private UserService userservice;
     
 	@PostMapping("/registerdealer")
-	public String userRegister(@RequestBody Dealer dealer,Model m)
+	public BaseResponse userRegister(@RequestBody Dealer dealer,Model m)
 	{
 
 
 		if(userservice.addUser(dealer))
 		{
 			m.addAttribute("registerdealerstatus", "User added");
-			return "user added";
+			//return "user added";
+			return new BaseResponse(200, "yes", "Dealer User added");
 		}
 		else
 		{
 			m.addAttribute("registerdealerstatus", "User not add there may be similarity in username or email added");
-			return "user not added";
+			//return "user not added";
+			return new BaseResponse(401, "User not add there may be similarity in username or email added");
 		}
 		
 	}
 	@PostMapping("/registertrader")
-	public Model userRegister(@RequestBody Trader trader,Model m)
+	public BaseResponse userRegister(@RequestBody Trader trader,Model m)
 	{
 		
 
 		if(userservice.addUser(trader))
 		{
 			m.addAttribute("registertraderstatus", "User added");
-		return m;
+		//return m;
+			return new BaseResponse(200, "yes", "Trader User added");
 		}
 		else
 		{
 			m.addAttribute("registertraderstatus", "User not add there may be similarity in username or email added");
-			return m;	
+			//return m;	
+			return new BaseResponse(401, "User not add there may be similarity in username or email added");
+			
+			
 		}
 		
 	}
@@ -71,75 +77,84 @@ public class UserController {
 	else
 	{
 		m.addAttribute("loginuser","user not found");
-		return new BaseResponse(200, "no");
+		return new BaseResponse(200, "user not found");
 	}
 	}
 	@PutMapping("/userdealer")
-	public Model userEdit(@RequestBody Dealer dealer,Model m)
+	public BaseResponse userEdit(@RequestBody Dealer dealer,Model m)
 	{   
 		if(userservice.updateUser(dealer)==1)
 		{    
 			m.addAttribute("DealerupdateStatus", "Dealer User Updated");
-			return m;
+			//return m;
+			return new BaseResponse(200, "yes","Dealer User Updated" );
 		}
 		else
 		{
 			m.addAttribute("DealerupdateStatus", "Dealer User Updated");
-			return m;
+			//return m;
+			return new BaseResponse(422, "Dealer User not found");
 		}
 	}
 	@PutMapping("/usertrader")
-	public Model userEdit(@RequestBody Trader trader,Model m)
+	public BaseResponse userEdit(@RequestBody Trader trader,Model m)
 	{   
 		if(userservice.updateUser(trader)==1)
 		{
 			m.addAttribute("traderupdateStatus", "Trader User Updated");
-			return m;
+			//return m;
+			return new BaseResponse(200, "yes", "Trader User Updated");
 		}
 		else
 		{   
 			m.addAttribute("traderupdateStatus", "Trader User not Updated");
-			return m;
+			//return m;
+			return new BaseResponse(422, "Trader User not found");
 		}
 	}
 	@GetMapping("/user")
-	public  Model userDisplayToEdit(@RequestParam("userId") int userId,Model m)
+	public  BaseResponse userDisplayToEdit(@RequestParam("userId") int userId,Model m)
 	{
 		Optional<User> u=userservice.getUserById(userId);
 		if(u.isPresent())
 		{
 			m.addAttribute("displayuserbyId",u);
-			return m;
+			//return m;
+			return new BaseResponse(200, "yes", u);
 		}
 		else
 
 		{
 			m.addAttribute("displayuserbyId","user is null");
-			return m;
+			//return m;
+			return new BaseResponse(422, "User not found");
 		}
 	}
 	@DeleteMapping("/user")
-	public Model deleteUser(@RequestParam("userId") int userId,Model m)
+	public BaseResponse deleteUser(@RequestParam("userId") int userId,Model m)
 	{
 		if(userservice.deleteUser(userId))
 		{   m.addAttribute("userDeleteStatus","User deleted");
-			return m;
+			//return m;
+		return new BaseResponse(200, "yes","User deleted" );
 		}
 		else
 		{
 			m.addAttribute("userDeleteStatus","User not deleted");
-			return m;
+			//return m;
+			return new BaseResponse(422, "User not found not deleted ");
 		}
 
 
 	}
 	@GetMapping("/getalluser")
-	public Model getUsers(Model m)
+	public BaseResponse getUsers(Model m)
 	
 	{   
 		List<User> u=userservice.getUsers();
 		m.addAttribute("UserList", u);
-		return m;
+		//return m;
+		return new BaseResponse(200, "yes", u);
 		 
 	}
 
