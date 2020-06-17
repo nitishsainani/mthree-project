@@ -1,7 +1,6 @@
-package com.mthree.MarketOrder;
+package com.mthree.orders;
 
-import javax.persistence.*;
-import com.mthree.Order.*;
+import javax.persistence.Entity;
 
 @Entity
 public class MarketOrder extends OrderModel{

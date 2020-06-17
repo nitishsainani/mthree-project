@@ -1,9 +1,9 @@
-package com.mthree.Order;
+package com.mthree.orders;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mthree.stock.*;
-import com.mthree.user.*;
+import com.mthree.users.*;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)   
 public class OrderModel {

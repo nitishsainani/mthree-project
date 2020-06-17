@@ -1,10 +1,15 @@
-package com.mthree.Order;
+package com.mthree.orderservices;
+
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.*;
-import com.mthree.LimitOrder.*;
-import com.mthree.MarketOrder.*;
+
+import com.mthree.orderrepositories.OrderRepository;
+import com.mthree.orders.LimitOrder;
+import com.mthree.orders.MarketOrder;
+import com.mthree.orders.OrderModel;
 @Service
 public class OrderService {
 	@Autowired

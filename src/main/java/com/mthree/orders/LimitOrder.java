@@ -1,7 +1,6 @@
-package com.mthree.LimitOrder;
+package com.mthree.orders;
 
-import javax.persistence.*;
-import com.mthree.Order.*;
+import javax.persistence.Entity;
 
 @Entity
 public class LimitOrder extends OrderModel {
