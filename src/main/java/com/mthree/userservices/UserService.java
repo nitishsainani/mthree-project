@@ -38,6 +38,7 @@ public class UserService {
 			{
 				return userrepo.findByUserName(username);
 			}
+			return null;
 		}
 		return null;
 	}
