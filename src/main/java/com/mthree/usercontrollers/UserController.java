@@ -31,13 +31,13 @@ public class UserController {
 
 		if(userservice.addUser(dealer))
 		{
-			m.addAttribute("registerdealerstatus", "User added");
+			//m.addAttribute("registerdealerstatus", "User added");
 			//return "user added";
-			return new BaseResponse(200, "yes", "Dealer User added");
+			return new BaseResponse(200,"Dealer User added");
 		}
 		else
 		{
-			m.addAttribute("registerdealerstatus", "User not add there may be similarity in username or email added");
+			//m.addAttribute("registerdealerstatus", "User not add there may be similarity in username or email added");
 			//return "user not added";
 			return new BaseResponse(401, "User not add there may be similarity in username or email added");
 		}
@@ -50,13 +50,13 @@ public class UserController {
 
 		if(userservice.addUser(trader))
 		{
-			m.addAttribute("registertraderstatus", "User added");
+			//m.addAttribute("registertraderstatus", "User added");
 		//return m;
-			return new BaseResponse(200, "yes", "Trader User added");
+			return new BaseResponse(200,"Trader User added");
 		}
 		else
 		{
-			m.addAttribute("registertraderstatus", "User not add there may be similarity in username or email added");
+			//m.addAttribute("registertraderstatus", "User not add there may be similarity in username or email added");
 			//return m;	
 			return new BaseResponse(401, "User not add there may be similarity in username or email added");
 			
@@ -71,12 +71,12 @@ public class UserController {
 		
 	User u=userservice.Login(name,pass);
 	if(u!=null)
-	{   m.addAttribute("loginuser",u);
+	{   //m.addAttribute("loginuser",u);
 		return new BaseResponse(200, "yes", u);
 	}
 	else
 	{
-		m.addAttribute("loginuser","user not found");
+		//m.addAttribute("loginuser","user not found");
 		return new BaseResponse(200, "user not found");
 	}
 	}
@@ -85,13 +85,13 @@ public class UserController {
 	{   
 		if(userservice.updateUser(dealer)==1)
 		{    
-			m.addAttribute("DealerupdateStatus", "Dealer User Updated");
+			//m.addAttribute("DealerupdateStatus", "Dealer User Updated");
 			//return m;
-			return new BaseResponse(200, "yes","Dealer User Updated" );
+			return new BaseResponse(200,"Dealer User Updated" );
 		}
 		else
 		{
-			m.addAttribute("DealerupdateStatus", "Dealer User Updated");
+			//m.addAttribute("DealerupdateStatus", "Dealer User Updated");
 			//return m;
 			return new BaseResponse(422, "Dealer User not found");
 		}
@@ -101,13 +101,13 @@ public class UserController {
 	{   
 		if(userservice.updateUser(trader)==1)
 		{
-			m.addAttribute("traderupdateStatus", "Trader User Updated");
+			//m.addAttribute("traderupdateStatus", "Trader User Updated");
 			//return m;
-			return new BaseResponse(200, "yes", "Trader User Updated");
+			return new BaseResponse(200, "Trader User Updated");
 		}
 		else
 		{   
-			m.addAttribute("traderupdateStatus", "Trader User not Updated");
+			//m.addAttribute("traderupdateStatus", "Trader User not Updated");
 			//return m;
 			return new BaseResponse(422, "Trader User not found");
 		}
@@ -134,13 +134,13 @@ public class UserController {
 	public BaseResponse deleteUser(@RequestParam("userId") int userId,Model m)
 	{
 		if(userservice.deleteUser(userId))
-		{   m.addAttribute("userDeleteStatus","User deleted");
+		{  // m.addAttribute("userDeleteStatus","User deleted");
 			//return m;
-		return new BaseResponse(200, "yes","User deleted" );
+		return new BaseResponse(200,"User deleted" );
 		}
 		else
 		{
-			m.addAttribute("userDeleteStatus","User not deleted");
+			//m.addAttribute("userDeleteStatus","User not deleted");
 			//return m;
 			return new BaseResponse(422, "User not found not deleted ");
 		}
