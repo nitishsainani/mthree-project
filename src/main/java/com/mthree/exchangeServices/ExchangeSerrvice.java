@@ -1,11 +1,17 @@
 package com.mthree.exchangeServices;
 
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mthree.orders.*;
-import java.util.*;
+import com.mthree.exchangeRepositories.ExchangeRepository;
+import com.mthree.exchanges.Exchange;
+import com.mthree.orders.LimitOrder;
+import com.mthree.orders.OrderModel;
+import com.mthree.orderservices.OrderService;
 
 @Service
 public class ExchangeSerrvice {
@@ -55,3 +61,4 @@ public class ExchangeSerrvice {
 	}
 
 }
+

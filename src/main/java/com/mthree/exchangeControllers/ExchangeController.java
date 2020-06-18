@@ -1,7 +1,12 @@
 package com.mthree.exchangeControllers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import com.mthree.responses.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mthree.exchangeServices.ExchangeSerrvice;
+import com.mthree.exchanges.Exchange;
+import com.mthree.responses.BaseResponse;
 
 @RestController
 public class ExchangeController {
@@ -28,3 +33,4 @@ public class ExchangeController {
 		return new BaseResponse(200,"Fee Ladder",tradeValue);
 	}
 }
+
