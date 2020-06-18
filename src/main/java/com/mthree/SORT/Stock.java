@@ -1,14 +1,16 @@
 package com.mthree.SORT;
 
+import java.util.HashMap;
+
 public class Stock {
     private String symbol;
     private String name;
-    private int price;
+    private HashMap<String, Double> priceData;
 
-    public Stock(String symbol, String name, int price) {
+    public Stock(String symbol, String name, HashMap<String, Double> priceData) {
         this.symbol = symbol;
         this.name = name;
-        this.price = price;
+        this.priceData = priceData;
     }
 
     public String getSymbol() {
@@ -27,11 +29,11 @@ public class Stock {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public HashMap<String, Double> getPriceData() {
+        return priceData;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPriceData(HashMap<String, Double> priceData) {
+        this.priceData = priceData;
     }
 }
