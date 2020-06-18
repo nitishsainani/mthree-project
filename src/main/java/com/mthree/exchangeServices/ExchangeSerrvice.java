@@ -39,8 +39,9 @@ public class ExchangeSerrvice {
 			Object o =iterator.next();
 			OrderModel mobj = OrderModel.class.cast(o);
 			quantity+=mobj.getQuantity();
-			fee+= quantity * commissionPercent;
+		
 		}
+                fee+= quantity * commissionPercent;
 		return fee;
 	}
 	public String todayTradeValue() {
