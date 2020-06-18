@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mthree.dtos.OrderDTO;
 import com.mthree.orderrepositories.OrderRepository;
 import com.mthree.orders.LimitOrder;
 import com.mthree.orders.MarketOrder;
@@ -18,17 +19,28 @@ public class OrderService {
 	public List<OrderModel> getAllOrder(){
 		return orderRepository.findAll();
 	}
-	public boolean addNewLimitOrder(LimitOrder order) {
+	public List<OrderDTO> displayOrders(int userId){
+		
+		return orderRepository.displayOrders(userId);
+	}
+	public boolean addNewLimitOrder(LimitOrder order,int userId,int instrumentId) {
 		if(order!=null) {
 		    orderRepository.save(order);
+		    if(orderRepository.updateLimitOrderById(order.getOrderId(),userId,instrumentId)==1)
 		    return true;
+		    else 
+		    	return false;
 		}
 		return false;
 	}
-	public boolean addNewMarketOrder(MarketOrder order) {
+	public boolean addNewMarketOrder(MarketOrder order,int userId,int instrumentId) {
 		if(order!=null) {
 		    orderRepository.save(order);
-		    return true;
+		    
+		    if(orderRepository.updateMarketOrderById(order.getOrderId(),userId,instrumentId)==1)
+			    return true;
+			    else 
+			    	return false;
 		}
 		return false;
 	}

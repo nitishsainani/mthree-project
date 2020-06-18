@@ -1,5 +1,8 @@
 package com.mthree.users;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -8,6 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.mthree.orders.OrderModel;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)  
@@ -22,6 +29,9 @@ public class User {
 	protected String fullName;
 	protected String email;
 	protected String dateOfBirth;
+	@OneToMany(mappedBy="userId",cascade=CascadeType.ALL)
+	@JsonBackReference
+	protected List<OrderModel> orders;
 	public User()
 	{
 		

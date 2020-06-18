@@ -1,8 +1,12 @@
 package com.mthree.orders;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import com.mthree.users.User;
+
 @Entity
+@DiscriminatorValue(value="limitOrder")
 public class LimitOrder extends OrderModel {
 	private Double price;
 
@@ -18,10 +22,14 @@ public class LimitOrder extends OrderModel {
 		super();
 	}
 
-	public LimitOrder(int orderId, String side, String status, int exchangeId, Double price) {
-		super(orderId, side, status, exchangeId);
+	public LimitOrder(int orderId, String side, String status, int exchangeId, Double price,String InstrumentName,int quantity) {
+		super(orderId, side, status, exchangeId,InstrumentName,quantity);
 		this.price = price;
 	}
+
+	 
+
+	
 	
 	
 }
