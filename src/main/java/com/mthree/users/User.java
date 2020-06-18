@@ -14,6 +14,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.mthree.notifications.Notification;
 import com.mthree.orders.OrderModel;
 
 @Entity
@@ -32,6 +33,9 @@ public class User {
 	@OneToMany(mappedBy="userId",cascade=CascadeType.ALL)
 	@JsonBackReference
 	protected List<OrderModel> orders;
+	@OneToMany(mappedBy="userId",cascade=CascadeType.ALL)
+	//@JsonBackReference
+	protected List<Notification> notifications;
 	public User()
 	{
 		
