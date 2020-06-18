@@ -39,8 +39,9 @@ public class ExchangeSerrvice {
 			Object o =iterator.next();
 			OrderModel mobj = OrderModel.class.cast(o);
 			quantity+=mobj.getQuantity();
-			fee+= quantity * commissionPercent;
+		
 		}
+                fee+= quantity * commissionPercent;
 		return fee;
 	}
 	public String todayTradeValue() {
@@ -52,9 +53,11 @@ public class ExchangeSerrvice {
 		while(iterator.hasNext()) {
 			Object o = iterator.next();
 			OrderModel mobj = OrderModel.class.cast(o);
-			LimitOrder l = (LimitOrder) mobj;
-			if(l.getStatus().equalsIgnoreCase("done"))
-			totalprice+= l.getPrice();
+			if(mobj instanceof LimitOrder) {
+				LimitOrder l = (LimitOrder) mobj;
+				if(l.getStatus().equalsIgnoreCase("Active"))
+				totalprice+= l.getPrice();
+			}
 		}
 		tradeValue = String.format("%.2f", totalprice/(double)order.size());
 		return tradeValue;
