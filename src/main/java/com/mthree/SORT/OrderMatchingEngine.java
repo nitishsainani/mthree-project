@@ -1,7 +1,6 @@
 package com.mthree.SORT;
 
-import com.mthree.orders.LimitOrder;
-import org.hibernate.criterion.Order;
+import com.mthree.models.LimitOrder;
 
 import java.util.ArrayList;
 import java.util.List;

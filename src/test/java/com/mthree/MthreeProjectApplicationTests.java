@@ -14,11 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mthree.userrepositories.UserRepository;
-import com.mthree.users.Dealer;
-import com.mthree.users.Trader;
-import com.mthree.users.User;
-import com.mthree.userservices.UserService;
+import com.mthree.repositories.UserRepository;
+import com.mthree.models.Dealer;
+import com.mthree.models.Trader;
+import com.mthree.models.User;
+import com.mthree.services.UserService;
 
 @SpringBootTest
 class MthreeProjectApplicationTests {

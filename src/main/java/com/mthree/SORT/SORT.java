@@ -1,7 +1,7 @@
 package com.mthree.SORT;
 
-import com.mthree.orders.LimitOrder;
-import com.mthree.orderservices.OrderService;
+import com.mthree.models.LimitOrder;
+import com.mthree.services.OrderService;
 
 import java.util.ArrayList;
 import java.util.List;
