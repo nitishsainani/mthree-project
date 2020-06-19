@@ -2,15 +2,10 @@ package com.mthree.controllers;
 
 import java.util.List;
 
+import com.mthree.SORT.SORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mthree.dtos.OrderDTO;
 import com.mthree.models.LimitOrder;
@@ -19,12 +14,14 @@ import com.mthree.models.OrderModel;
 import com.mthree.services.OrderService;
 import com.mthree.responses.BaseResponse;
 @RestController
+@CrossOrigin
 public class OrderController {
-	@Autowired 
+	@Autowired
 	private OrderService orderService;
 	
 	@PostMapping("/addLimitOrder/{userId}/{instrumentId}")
 	public BaseResponse addNewLimitOrder(@RequestBody LimitOrder e,@PathVariable("userId")int userId,@PathVariable("instrumentId")int instrumentId) {
+		SORT.addLimitOrder(e, userId, instrumentId);
 		if(orderService.addNewLimitOrder(e,userId,instrumentId)) {
 			return new BaseResponse(200,"Limit Order added");
 		}

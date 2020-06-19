@@ -1,5 +1,6 @@
 package com.mthree.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import com.mthree.models.Exchange;
 import com.mthree.responses.BaseResponse;
 
 @RestController
+@CrossOrigin
 public class ExchangeController {
 	@Autowired 
 	private ExchangeSerrvice exchangeService;

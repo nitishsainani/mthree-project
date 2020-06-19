@@ -13,9 +13,9 @@ import java.util.List;
 import com.google.gson.*;
 
 public class RandomData {
-    private List<Exchange> exchanges;
-    private ArrayList<String> companyNames;
-    private ArrayList<String> companySymbols;
+    public List<Exchange> exchanges;
+    public ArrayList<String> companyNames;
+    public ArrayList<String> companySymbols;
 
     public RandomData() {
         companyNames = new ArrayList<>(Arrays.asList(

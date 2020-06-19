@@ -6,13 +6,7 @@ import java.util.Optional;
 import com.mthree.responses.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mthree.models.Dealer;
 import com.mthree.models.Trader;
@@ -20,6 +14,7 @@ import com.mthree.models.User;
 import com.mthree.services.UserService;
 
 @RestController
+@CrossOrigin
 public class UserController {
 	@Autowired
 	private UserService userservice;
@@ -148,14 +143,10 @@ public class UserController {
 
 	}
 	@GetMapping("/getalluser")
-	public BaseResponse getUsers(Model m)
-	
-	{   
+	public BaseResponse getUsers(Model m) {
 		List<User> u=userservice.getUsers();
 		m.addAttribute("UserList", u);
 		//return m;
 		return new BaseResponse(200, "yes", u);
-		 
 	}
-
 }
